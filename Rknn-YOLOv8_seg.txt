@@ -1,0 +1,30 @@
+#Installa venv en tu laptop o ordenador.
+sudo apt-get update
+sudo apt-get install -y python3 python3-dev python3-pip gcc
+sudo apt-get install -y python3-opencv
+sudo apt-get install -y python3-numpy
+sudo apt-get install git
+sudo apt-get install wget
+sudo apt-get install python3-setuptools
+sudo apt-get install python3-venv
+python -m venv venv
+source venv/bin/activate
+#Una ves aqui
+cd ~
+mkdir projecto
+cd projecto
+git clone https://github.com/rockchip-linux/rknn-toolkit2
+cd rknn-toolkit2/packages
+pip install -r requirements_cp311-1.6.0.txt
+pip install rknn_toolkit2-1.6.0%2B81f21f4d-cp311-cp311-linux_x86_64.whl
+cd ~/projecto/
+git clone https://github.com/airockchip/rknn_model_zoo.git
+cd rknn_model_zoo/example/yolov8_seg/model/
+chmod +x download_model.sh
+./download_model.sh
+cd ../python/
+python convert.py ../model/yolov8s-seg.onnx rk3588 
+# you should have the rknn model exported. once exported you can try it out on 
+your laptop and it will work. use the text code as an example to implement your 
+code, compare it with the examples inside the rknn-toolkit2-lite and implement 
+it in your orange pi 5
